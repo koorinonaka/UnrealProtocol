@@ -1,0 +1,3 @@
+[submodule "Project/UnrealProtocolHandler/cpp-httplib"]
+	path = Project/UnrealProtocolHandler/cpp-httplib
+	url = https://github.com/yhirose/cpp-httplib
