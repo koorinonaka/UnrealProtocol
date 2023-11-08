@@ -76,7 +76,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EBB7F078C3A46198CF322B0D88DDE24"
             {
-            "SourcePath" = "8:..\\x64\\Release\\UnrealProtocolHandler.exe"
+            "SourcePath" = "8:..\\UnrealProtocolHandler\\UnrealProtocolHandler.exe"
             "TargetName" = "8:UnrealProtocolHandler.exe"
             "Tag" = "8:"
             "Folder" = "8:_D9B39EA0C3BB4ED283BFFF2B78C59909"
