@@ -5,6 +5,7 @@
 #include "Editor.h"
 #include "Framework/Notifications/NotificationManager.h"
 #include "GenericPlatform/GenericPlatformHttp.h"
+#include "Interfaces/IMainFrameModule.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
 IMPLEMENT_MODULE( FUnrealProtocolModule, UnrealProtocol )
@@ -33,6 +34,10 @@ void UUnrealProtocol::Entry( const FString& URL )
 
 	// ReSharper disable once CppExpressionWithoutSideEffects
 	Delegate->ExecuteIfBound( URL );
+
+	// エディタを強制的にアクティブ化
+	const IMainFrameModule& MainFrameModule = FModuleManager::LoadModuleChecked<IMainFrameModule>( TEXT( "MainFrame" ) );
+	MainFrameModule.GetParentWindow()->GetNativeWindow()->HACK_ForceToFront();
 }
 
 bool UUnrealProtocol::ShowNotification( const FText Text, ENotification CompletionState, const float ExpireDuration )
