@@ -17,7 +17,7 @@
 	"Modules": [
 		{
 			"Name": "UnrealProtocol",
-			"Type": "Runtime",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}
 	],
