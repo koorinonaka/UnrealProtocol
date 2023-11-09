@@ -5,7 +5,6 @@
 #include "Editor.h"
 #include "Framework/Notifications/NotificationManager.h"
 #include "GenericPlatform/GenericPlatformHttp.h"
-#include "Interfaces/IMainFrameModule.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
 IMPLEMENT_MODULE( FUnrealProtocolModule, UnrealProtocol )
@@ -36,8 +35,16 @@ void UUnrealProtocol::Entry( const FString& URL )
 	Delegate->ExecuteIfBound( URL );
 
 	// エディタを強制的にアクティブ化
-	const IMainFrameModule& MainFrameModule = FModuleManager::LoadModuleChecked<IMainFrameModule>( TEXT( "MainFrame" ) );
-	MainFrameModule.GetParentWindow()->GetNativeWindow()->HACK_ForceToFront();
+	if ( const TSharedPtr<SWindow> Window = FGlobalTabmanager::Get()->GetRootWindow() )
+	{
+		if ( Window->IsWindowMinimized() )
+		{
+			Window->Restore();
+		}
+
+		Window->HACK_ForceToFront();
+		// Window->FlashWindow();
+	}
 }
 
 bool UUnrealProtocol::ShowNotification( const FText Text, ENotification CompletionState, const float ExpireDuration )
