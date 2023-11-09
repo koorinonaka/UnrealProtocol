@@ -43,6 +43,8 @@ void UUnrealProtocol::Entry( const FString& URL )
 		}
 
 		Window->HACK_ForceToFront();
+
+		// 注意を引くためにWindow上部を点滅させる
 		// Window->FlashWindow();
 	}
 }
