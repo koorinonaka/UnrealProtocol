@@ -78,5 +78,5 @@ bool UUnrealProtocol::ShowNotification( const FString Message, ENotification Com
 
 FString UnrealProtocol::BuildLink( const FString& URL )
 {
-	return FString::Printf( TEXT( "Unreal://%s" ), *URL.TrimChar( '/' ) ).ToLower();
+	return FString::Printf( TEXT( "unreal://%s" ), *URL.TrimChar( '/' ) ).ToLower();
 }
