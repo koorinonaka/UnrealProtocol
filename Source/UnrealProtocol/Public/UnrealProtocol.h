@@ -42,7 +42,7 @@ public:
 	static bool ShowNotification( const FString Message, ENotification CompletionState, const float ExpireDuration = 4.0f );
 };
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 FString BuildLink( const FString& URL );
 

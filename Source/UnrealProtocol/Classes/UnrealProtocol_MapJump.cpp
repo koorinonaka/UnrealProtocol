@@ -5,7 +5,7 @@
 #include "HAL/PlatformApplicationMisc.h"
 #include "Subsystems/UnrealEditorSubsystem.h"
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 struct FMapJumpCallback
 {
@@ -22,7 +22,7 @@ FString FMapJump::BuildLink( const FUnrealProtocol_MapJumpContext& Context )
 	FString ContextString;
 	Serialize( Context, ContextString );
 
-	return Protocol::BuildLink(
+	return UnrealProtocol::BuildLink(
 		FString::Printf( TEXT( "%s?ctx=%s" ), Path.GetData(), *FGenericPlatformHttp::UrlEncode( ContextString ) ) );
 }
 
@@ -57,7 +57,7 @@ void FMapJump::Execute( const FString& RawURL )
 		UnrealEditorSubsystem->SetLevelViewportCameraInfo( Context.CameraLocation, Context.CameraRotation );
 	}
 }
-}	 // namespace Unreal::Protocol
+}	 // namespace UnrealProtocol
 
 void UUnrealProtocol_MapJump::CopyLink()
 {
@@ -73,7 +73,7 @@ void UUnrealProtocol_MapJump::CopyLink()
 			if ( UnrealEditorSubsystem->GetLevelViewportCameraInfo( CameraLocation, CameraRotation ) )
 			{
 				FPlatformApplicationMisc::ClipboardCopy(
-					*Unreal::Protocol::FMapJump::BuildLink( { EditorWorld, CameraLocation, CameraRotation } ) );
+					*UnrealProtocol::FMapJump::BuildLink( { EditorWorld, CameraLocation, CameraRotation } ) );
 			}
 		}
 	}

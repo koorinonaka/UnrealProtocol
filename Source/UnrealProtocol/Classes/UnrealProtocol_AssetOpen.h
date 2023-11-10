@@ -6,7 +6,7 @@
 
 #include "UnrealProtocol_AssetOpen.generated.h"
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 class FAssetOpen
 {

@@ -9,14 +9,14 @@
 
 IMPLEMENT_MODULE( FUnrealProtocolModule, UnrealProtocol )
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 static TMap<FName, UUnrealProtocol::FURIDelegate> Delegates;
 }
 
 void UUnrealProtocol::SetCallback( const FName Path, const FURIDelegate& Callback )
 {
-	Unreal::Protocol::Delegates.Emplace( Path, Callback );
+	UnrealProtocol::Delegates.Emplace( Path, Callback );
 }
 
 void UUnrealProtocol::Entry( const FString& URL )
@@ -24,7 +24,7 @@ void UUnrealProtocol::Entry( const FString& URL )
 	// 解析処理の都合上、dummyのhost名を付与
 	const FString Path = FGenericPlatformHttp::GetUrlPath( "http://localhost/" + URL );
 
-	const FURIDelegate* Delegate = Unreal::Protocol::Delegates.Find( *Path );
+	const FURIDelegate* Delegate = UnrealProtocol::Delegates.Find( *Path );
 	if ( !Delegate )
 	{
 		ShowNotification( FString::Printf( TEXT( "bad request: %s" ), *Path ), ENotification::Fail );
@@ -76,7 +76,7 @@ bool UUnrealProtocol::ShowNotification( const FString Message, ENotification Com
 	return ShowNotification( FText::FromString( Message ), CompletionState, ExpireDuration );
 }
 
-FString Unreal::Protocol::BuildLink( const FString& URL )
+FString UnrealProtocol::BuildLink( const FString& URL )
 {
 	return FString::Printf( TEXT( "Unreal://%s" ), *URL.TrimChar( '/' ) ).ToLower();
 }

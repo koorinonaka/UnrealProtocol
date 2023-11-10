@@ -21,7 +21,7 @@ struct FUnrealProtocol_MapJumpContext
 	FRotator CameraRotation = FRotator::ZeroRotator;
 };
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 class FMapJump
 {

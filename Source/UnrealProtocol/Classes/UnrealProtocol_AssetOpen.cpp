@@ -5,7 +5,7 @@
 #include "EditorUtilityLibrary.h"
 #include "HAL/PlatformApplicationMisc.h"
 
-namespace Unreal::Protocol
+namespace UnrealProtocol
 {
 struct FAssetOpenCallback
 {
@@ -19,7 +19,7 @@ struct FAssetOpenCallback
 
 FString FAssetOpen::BuildLink( const FAssetData& AssetData )
 {
-	return Protocol::BuildLink( FString::Printf(
+	return UnrealProtocol::BuildLink( FString::Printf(
 		TEXT( "%s?path=%s" ), Path.GetData(), *FGenericPlatformHttp::UrlEncode( AssetData.PackageName.ToString() ) ) );
 }
 
@@ -41,14 +41,14 @@ void FAssetOpen::Execute( const FString& RawURL )
 		AssetEditorSubsystem->OpenEditorForAsset( FGenericPlatformHttp::UrlDecode( PackageName.GetValue() ) );
 	}
 }
-}	 // namespace Unreal::Protocol
+}	 // namespace UnrealProtocol
 
 void UUnrealProtocol_AssetOpen::CopyLink()
 {
 	TArray<FString> ClipboardStrings;
 	for ( const FAssetData& AssetData : UEditorUtilityLibrary::GetSelectedAssetData() )
 	{
-		ClipboardStrings.Emplace( Unreal::Protocol::FAssetOpen::BuildLink( AssetData ) );
+		ClipboardStrings.Emplace( UnrealProtocol::FAssetOpen::BuildLink( AssetData ) );
 	}
 
 	FPlatformApplicationMisc::ClipboardCopy( *FString::Join( ClipboardStrings, TEXT( "\n" ) ) );
