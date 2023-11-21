@@ -17,4 +17,4 @@ Solution file for application that receive an execution link and relay it to Unr
 [@koorinonaka](https://twitter.com/koorinonaka)
 
 ## Documantation
-https://qiita.com/koorinonaka/private/d8e9193632125c5dd3d5
+https://qiita.com/koorinonaka/items/d8e9193632125c5dd3d5
