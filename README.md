@@ -16,5 +16,5 @@ Solution file for application that receive an execution link and relay it to Unr
 ## Author
 [@koorinonaka](https://twitter.com/koorinonaka)
 
-## License
-under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+## Documantation
+https://qiita.com/koorinonaka/items/d8e9193632125c5dd3d5
