@@ -6,8 +6,8 @@ public class UnrealProtocol : ModuleRules
 {
 	public UnrealProtocol(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
 		PublicDependencyModuleNames.AddRange(
 			new[]
 			{
@@ -23,6 +23,7 @@ public class UnrealProtocol : ModuleRules
 				"SlateCore",
 
 				"UnrealEd",
+				"DeveloperSettings",
 				"Blutility",
 
 				"ApplicationCore",

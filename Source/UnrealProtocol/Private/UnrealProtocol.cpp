@@ -76,7 +76,18 @@ bool UUnrealProtocol::ShowNotification( const FString Message, ENotification Com
 	return ShowNotification( FText::FromString( Message ), CompletionState, ExpireDuration );
 }
 
+FName UUnrealProtocolSettings::GetCategoryName() const
+{
+	return TEXT( "Plugins" );
+}
+
+FText UUnrealProtocolSettings::GetSectionText() const
+{
+	return NSLOCTEXT( "UnrealProtocol", "UnrealProtocolSettingsSection", "Unreal Protocol" );
+}
+
 FString UnrealProtocol::BuildLink( const FString& URL )
 {
-	return FString::Printf( TEXT( "unreal://%s" ), *URL.TrimChar( '/' ) ).ToLower();
+	return FString::Printf( TEXT( "%s://%s" ),	  //
+		*GetDefault<UUnrealProtocolSettings>()->GetCustomScheme().ToString(), *URL.TrimChar( '/' ) ).ToLower();
 }

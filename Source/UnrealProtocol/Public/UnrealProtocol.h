@@ -6,7 +6,6 @@
 #include "GenericPlatform/GenericPlatformHttp.h"
 #include "JsonObjectConverter.h"
 #include "Modules/ModuleManager.h"
-
 #include "UnrealProtocol.generated.h"
 
 class FUnrealProtocolModule final : public IModuleInterface
@@ -40,6 +39,25 @@ public:
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "ExpireDuration" ) )
 	static bool ShowNotification( const FText Text, ENotification CompletionState, const float ExpireDuration = 4.0f );
 	static bool ShowNotification( const FString Message, ENotification CompletionState, const float ExpireDuration = 4.0f );
+};
+
+UCLASS()
+class UNREALPROTOCOL_API UUnrealProtocolSettings : public UDeveloperSettings
+{
+	GENERATED_BODY()
+
+protected:
+	virtual FName GetCategoryName() const override;
+#if WITH_EDITOR
+	virtual FText GetSectionText() const override;
+#endif
+
+public:
+	FName GetCustomScheme() const { return CustomScheme; }
+
+protected:
+	UPROPERTY( EditDefaultsOnly )
+	FName CustomScheme = TEXT( "unreal" );
 };
 
 namespace UnrealProtocol
