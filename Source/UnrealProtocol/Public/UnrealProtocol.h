@@ -2,18 +2,9 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "GenericPlatform/GenericPlatformHttp.h"
 #include "JsonObjectConverter.h"
-#include "Modules/ModuleManager.h"
 #include "UnrealProtocol.generated.h"
-
-class FUnrealProtocolModule final : public IModuleInterface
-{
-public:
-	virtual void StartupModule() override {}
-	virtual void ShutdownModule() override {}
-};
 
 UENUM()
 enum class ENotification : uint8
@@ -31,14 +22,14 @@ class UNREALPROTOCOL_API UUnrealProtocol : public UObject
 
 public:
 	DECLARE_DELEGATE_OneParam( FURIDelegate, const FString& RawURL );
-	static void SetCallback( const FName Path, const FURIDelegate& Callback );
+	TMap<FName, FURIDelegate> Delegates;
 
 	UFUNCTION( BlueprintCallable )
 	static void Entry( const FString& URL );
 
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "ExpireDuration" ) )
 	static bool ShowNotification( const FText Text, ENotification CompletionState, const float ExpireDuration = 4.0f );
-	static bool ShowNotification( const FString Message, ENotification CompletionState, const float ExpireDuration = 4.0f );
+	static bool ShowNotification( const FString& Message, ENotification CompletionState, const float ExpireDuration = 4.0f );
 };
 
 UCLASS()
@@ -75,4 +66,4 @@ bool Deserialize( const FString& Source, T& Destination )
 {
 	return FJsonObjectConverter::JsonObjectStringToUStruct<T>( Source, &Destination );
 }
-}
+}	 // namespace UnrealProtocol

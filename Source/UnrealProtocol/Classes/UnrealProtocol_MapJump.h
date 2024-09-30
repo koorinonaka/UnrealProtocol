@@ -3,7 +3,6 @@
 #pragma once
 
 #include "UnrealProtocol.h"
-
 #include "UnrealProtocol_MapJump.generated.h"
 
 USTRUCT( BlueprintType )
@@ -25,16 +24,11 @@ namespace UnrealProtocol
 {
 class FMapJump
 {
-	FMapJump() = default;
-	friend struct FMapJumpCallback;
-
-	void Execute( const FString& RawURL );
-	static constexpr FStringView Path = TEXTVIEW( "/map/jump" );
-
 public:
+	static constexpr FStringView Path = TEXTVIEW( "/map/jump" );
 	UNREALPROTOCOL_API static FString BuildLink( const FUnrealProtocol_MapJumpContext& Context );
 };
-}	 // namespace Unreal
+}	 // namespace UnrealProtocol
 
 UCLASS( BlueprintType )
 class UNREALPROTOCOL_API UUnrealProtocol_MapJump : public UObject
@@ -42,6 +36,8 @@ class UNREALPROTOCOL_API UUnrealProtocol_MapJump : public UObject
 	GENERATED_BODY()
 
 public:
+	UUnrealProtocol_MapJump();
+
 	UFUNCTION( BlueprintCallable )
 	void CopyLink();
 };

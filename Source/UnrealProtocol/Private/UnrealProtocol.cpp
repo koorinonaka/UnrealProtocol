@@ -2,29 +2,21 @@
 
 #include "UnrealProtocol.h"
 
-#include "Editor.h"
 #include "Framework/Notifications/NotificationManager.h"
-#include "GenericPlatform/GenericPlatformHttp.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
+class FUnrealProtocolModule final : public IModuleInterface
+{
+};
+
 IMPLEMENT_MODULE( FUnrealProtocolModule, UnrealProtocol )
-
-namespace UnrealProtocol
-{
-static TMap<FName, UUnrealProtocol::FURIDelegate> Delegates;
-}
-
-void UUnrealProtocol::SetCallback( const FName Path, const FURIDelegate& Callback )
-{
-	UnrealProtocol::Delegates.Emplace( Path, Callback );
-}
 
 void UUnrealProtocol::Entry( const FString& URL )
 {
 	// 解析処理の都合上、dummyのhost名を付与
 	const FString Path = FGenericPlatformHttp::GetUrlPath( "http://localhost/" + URL );
 
-	const FURIDelegate* Delegate = UnrealProtocol::Delegates.Find( *Path );
+	const FURIDelegate* Delegate = GetDefault<UUnrealProtocol>()->Delegates.Find( *Path );
 	if ( !Delegate )
 	{
 		ShowNotification( FString::Printf( TEXT( "bad request: %s" ), *Path ), ENotification::Fail );
@@ -71,7 +63,7 @@ bool UUnrealProtocol::ShowNotification( const FText Text, ENotification Completi
 	return false;
 }
 
-bool UUnrealProtocol::ShowNotification( const FString Message, ENotification CompletionState, const float ExpireDuration )
+bool UUnrealProtocol::ShowNotification( const FString& Message, ENotification CompletionState, const float ExpireDuration )
 {
 	return ShowNotification( FText::FromString( Message ), CompletionState, ExpireDuration );
 }

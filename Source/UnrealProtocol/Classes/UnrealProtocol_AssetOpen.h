@@ -3,23 +3,17 @@
 #pragma once
 
 #include "UnrealProtocol.h"
-
 #include "UnrealProtocol_AssetOpen.generated.h"
 
 namespace UnrealProtocol
 {
 class FAssetOpen
 {
-	FAssetOpen() = default;
-	friend struct FAssetOpenCallback;
-
-	void Execute( const FString& RawURL );
-	static constexpr FStringView Path = TEXTVIEW( "/asset/open" );
-
 public:
+	static constexpr FStringView Path = TEXTVIEW( "/asset/open" );
 	UNREALPROTOCOL_API static FString BuildLink( const FAssetData& AssetData );
 };
-}	 // namespace Unreal
+}	 // namespace UnrealProtocol
 
 UCLASS( BlueprintType )
 class UNREALPROTOCOL_API UUnrealProtocol_AssetOpen : public UObject
@@ -27,6 +21,8 @@ class UNREALPROTOCOL_API UUnrealProtocol_AssetOpen : public UObject
 	GENERATED_BODY()
 
 public:
+	UUnrealProtocol_AssetOpen();
+
 	UFUNCTION( BlueprintCallable )
 	void CopyLink();
 };
