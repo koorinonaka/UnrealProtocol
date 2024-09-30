@@ -19,6 +19,7 @@ public class UnrealProtocol : ModuleRules
 			{
 				"CoreUObject",
 				"Engine",
+				"InputCore",
 				"Slate",
 				"SlateCore",
 

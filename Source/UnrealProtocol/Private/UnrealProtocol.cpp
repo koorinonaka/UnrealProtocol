@@ -3,10 +3,25 @@
 #include "UnrealProtocol.h"
 
 #include "Framework/Notifications/NotificationManager.h"
+#include "UnrealProtocolContentBrowserExtensions.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
 class FUnrealProtocolModule final : public IModuleInterface
 {
+	virtual void StartupModule() override
+	{
+		if ( IsRunningCommandlet() )
+		{
+			return;
+		}
+
+		UnrealProtocol::ContentBrowserExtensions::FHooks::Install();
+	}
+
+	virtual void ShutdownModule() override	  //
+	{
+		UnrealProtocol::ContentBrowserExtensions::FHooks::Uninstall();
+	}
 };
 
 IMPLEMENT_MODULE( FUnrealProtocolModule, UnrealProtocol )
